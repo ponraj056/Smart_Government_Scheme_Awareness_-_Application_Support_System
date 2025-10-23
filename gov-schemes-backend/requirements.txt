@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+sqlalchemy[asyncio]
+asyncpg
+pydantic
+python-jose[cryptography]   # for JWT
+passlib[bcrypt]             # for password hashing

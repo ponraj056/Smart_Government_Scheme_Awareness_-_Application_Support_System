@@ -1,0 +1,32 @@
+services:
+  gov-db:
+    image: postgres:15
+    container_name: gov-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: gov_schemes
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  gov-backend:
+    build: .
+    container_name: gov-backend
+    depends_on:
+      - gov-db
+    environment:
+      DATABASE_URL: postgresql+asyncpg://postgres:postgres@gov-db:5432/gov_schemes
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app/backend
+    command: >
+      bash -c "chmod +x /app/backend/wait-for-db.sh && 
+               /app/backend/wait-for-db.sh &&
+               sleep 5 &&
+               uvicorn backend.main:app --host 0.0.0.0 --port 8000 --reload"
+
+volumes:
+  postgres-data:
