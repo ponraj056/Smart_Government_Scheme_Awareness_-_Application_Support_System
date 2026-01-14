@@ -1,4 +1,4 @@
-Smart Government Scheme Awareness & Application Support System
+Smart Government Scheme Awareness & Deadline Filteration with multimedia Support System
 
 A unified platform that helps citizens discover, filter, and understand Government Schemes and Job Opportunities using a clean UI, deadline validation, and multimedia-based explanations.
 
